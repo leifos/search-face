@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block query_box %}
+ <div id="search_box_area">
+        <form id="search_form" action="{% url 'serp-search' %}" method="post">
+            {% csrf_token %}
+            <!-- cross-site request forgery protection -->
+            <table>
+                <tr>
+                    <td class="searchlabel">Enter your query here</td>
+      <td><input class="searchbox" type="text" name="query" value="{{ query }}" id="query-box" size="50"/>
+                        </td>
+         <td>
+                            <input class="button" type="submit"
+                                   name="submit" value="Search"
+                                   id="search-button"/></td></tr>
+            </table>
+        </form>
+
+    </div>
+
+<input class="button"  value="Search"
+                                   id="test-button"/>
+
+{% endblock %}
+
+{% block search_results %}
+    {% for result in results %}
+    <div class="search_result" id="{{ result.docid }}" rank="{{ result.rank }}" page="{{ page }}">
+                <div class="results_squash">
+                    <div class="entry">
+                        <p class="result_title">
+
+                            <strong>
+                                <a class="doc-link"
+                              href="{% url 'serp-goto' %}?page_url={{result.url}}">
+
+                                    {{ result.title }}</a></strong></p>
+                          <div class="byline">
+                        {{ result.url }}
+                    </div>
+
+                        <p class="summary">{% autoescape off %} {{ result.summary  }} {% endautoescape %}</p>
+                    </div>
+
+
+                </div>
+            </div>
+        {% endfor %}
+
+
+{% endblock %}

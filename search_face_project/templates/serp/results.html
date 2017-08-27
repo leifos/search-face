@@ -1,0 +1,14 @@
+   {% for result in results %}
+            <div class="search-result" rank="{{ result.rank }}" >
+                    <div class="entry">
+                        <p class="result_title">
+                            <strong><a class="doc-link"
+                              href="{% url 'serp-goto' %}?page_url={{result.url}}">{{ result.title }}</a>
+                              </strong></p>
+                         <p class="byline">{{ result.url }}</p>
+                        <p class="summary">{% autoescape off %} {{ result.summary }} {% endautoescape %}</p>
+                    </div>
+
+
+            </div>
+        {% endfor %}
