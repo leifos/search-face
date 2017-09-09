@@ -21,7 +21,7 @@ class SearchView(View):
         results = []
         if 'query' in getdict:
             user_query = getdict['query']
-            results = run_query(user_query,10)
+            results = run_query(user_query)
             print(results)
 
         return render(request, self.template_name,{'query':user_query, 'results':results})
@@ -31,7 +31,7 @@ class SearchView(View):
         user_query = ''
         results = []
         user_query = request.POST['query'].strip()
-        results = run_query(user_query,10)
+        results = run_query(user_query)
 
         return render(request, self.template_name, {'query':user_query, 'results':results})
 
@@ -45,7 +45,7 @@ class ResultsView(View):
         results = []
         if 'query' in getdict:
             user_query = getdict['query']
-            results = run_query(user_query, 10)
+            results = run_query(user_query)
 
         return render(request, self.template_name, {'results':results})
 
