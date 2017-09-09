@@ -1,11 +1,12 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse
 from django.views import View
-from ifind.search import EngineFactory
-from ifind.search import Query
 
 import logging
 import logging.handlers
 from django.conf import settings
+#from webhose_search import run_query
+from bing_search import run_query
+
 logger = logging.getLogger('sample')
 
 
@@ -13,7 +14,6 @@ logger = logging.getLogger('sample')
 
 class SearchView(View):
     template_name = 'serp/search.html'
-    engine = EngineFactory('dummy')
 
     def get(self, request, *args, **kwargs):
         getdict = request.GET
@@ -21,7 +21,7 @@ class SearchView(View):
         results = []
         if 'query' in getdict:
             user_query = getdict['query']
-            results = self.do_search(user_query,1,10)
+            results = run_query(user_query,10)
             print(results)
 
         return render(request, self.template_name,{'query':user_query, 'results':results})
@@ -31,19 +31,13 @@ class SearchView(View):
         user_query = ''
         results = []
         user_query = request.POST['query'].strip()
-        results = self.do_search(user_query,1,10)
+        results = run_query(user_query,10)
 
         return render(request, self.template_name, {'query':user_query, 'results':results})
 
-    def do_search(self, query_str, page, num_results):
-        logger.info("Query Issued {0}".format(query_str))
-        query = Query(query_str, top=num_results)
-        response = self.engine.search(query)
-        return response
 
 class ResultsView(View):
     template_name = 'serp/results.html'
-    engine = EngineFactory('dummy')
 
     def get(self, request, *args, **kwargs):
         getdict = request.GET
@@ -51,15 +45,11 @@ class ResultsView(View):
         results = []
         if 'query' in getdict:
             user_query = getdict['query']
-            results = self.do_search(user_query,1,10)
+            results = run_query(user_query, 10)
 
         return render(request, self.template_name, {'results':results})
 
-    def do_search(self, query_str, page, num_results):
-        logger.info("Query Issued {0}".format(query_str))
-        query = Query(query_str, top=num_results)
-        response = self.engine.search(query)
-        return response
+
 
 
 
