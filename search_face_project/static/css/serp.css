@@ -51,7 +51,7 @@ body {
 
 .results {
 	width: 70%;
-	margin: 0px auto 50px auto;
+	margin: 5px auto 50px auto;
 }
 
 .document_content, .experiment{
@@ -145,11 +145,12 @@ p.result_title a:visited {
 
 div.byline {
 	color: green;
-	margin-top: -12px;
+	margin-top: 2px;
+	margin-bottom: 2px;
 	}
 
 p.summary {
-	margin-top: -12px;
+	margin-top: 5px;
 	}
 
 

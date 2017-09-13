@@ -1,8 +1,8 @@
    {% for result in results %}
             <div class="search-result" rank="{{ result.rank }}" >
-                    <div class="entry">
+                    <div>
                         <p class="result_title">
-                            <strong><a class="doc-link"
+                            <strong><a
                               href="{% url 'serp-goto' %}?page_url={{result.url}}">{{ result.title }}</a>
                               </strong></p>
                          <p class="byline">{{ result.url }}</p>
@@ -12,3 +12,5 @@
 
             </div>
         {% endfor %}
+
+

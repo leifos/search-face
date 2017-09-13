@@ -5,7 +5,8 @@ import logging
 import logging.handlers
 from django.conf import settings
 #from webhose_search import run_query
-from bing_search import run_query
+#from bing_search import run_query
+from chatnoir_search import run_query
 
 logger = logging.getLogger('sample')
 
