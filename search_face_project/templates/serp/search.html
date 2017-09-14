@@ -33,8 +33,7 @@
                             <strong>
                                 <a class="doc-link"
                               href="{% url 'serp-goto' %}?page_url={{result.link}}">
-
-                                    {{ result.title }}</a></strong></p>
+{% autoescape off %}{{ result.title }} {% endautoescape %}</a></strong></p>
                           <div class="byline">
                         {{ result.link }}
                     </div>
